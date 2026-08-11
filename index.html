@@ -3,57 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>小布 · Developer &amp; Worldbuilder</title>
-<meta name="description" content="小布 —— 全栈开发者 · 世界观构建者。在代码与故事之间来回穿梭。">
+<title>小布 · 全栈开发者</title>
+<meta name="description" content="小布 —— 全栈开发者。专注前端工程、数据可视化与物联网，把复杂系统拆成干净代码，让数据看得见。">
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%237c9bff'/><text x='50' y='68' font-size='52' font-family='PingFang SC,sans-serif' font-weight='bold' fill='white' text-anchor='middle'>布</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%2322d3ee'/><text x='50' y='68' font-size='52' font-family='PingFang SC,sans-serif' font-weight='bold' fill='white' text-anchor='middle'>布</text></svg>">
 </head>
 <body>
-  <div class="aurora" aria-hidden="true"></div>
+  <!-- 粒子网络背景 -->
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- HUD 装饰 -->
+  <div class="hud hud-tl" aria-hidden="true"><span class="hud-dot"></span>SYSTEM ONLINE</div>
+  <div class="hud hud-tr" aria-hidden="true">N 23.1° · E 113.3°</div>
 
   <main class="page">
-    <section class="hero">
-      <div class="avatar">布</div>
+    <!-- Hero -->
+    <header class="hero" id="top">
+      <div class="badge">&lt;developer /&gt;</div>
       <h1 class="name">小布</h1>
-      <p class="subtitle">全栈开发者 <span class="dot">·</span> 世界观构建者</p>
+      <p class="type-line"><span class="cursor"></span></p>
       <p class="intro">
-        白天写代码，晚上写故事。<br>
-        在 <em>Vue</em> 与 <em>修仙世界</em> 之间来回穿梭——
-        前端、数据可视化、物联网，和那些严谨到可被实验验证的设定体系。
+        专注前端工程与物联网，擅长把复杂系统拆成干净代码，让数据看得见。
+        长期深耕数据可视化、工业监控与 3D 交互。
       </p>
-    </section>
-
-    <section class="duo">
-      <article class="card">
-        <div class="card-icon">💻</div>
-        <h2>开发者</h2>
-        <p>把复杂系统拆成干净代码：Vue / Node.js / Python，数据可视化与工业物联网。</p>
-        <ul class="tags">
-          <li>Vue</li><li>Node.js</li><li>Python</li>
-          <li>ECharts</li><li>Three.js</li><li>物联网</li>
-          <li>数据可视化</li>
-        </ul>
-      </article>
-      <article class="card">
-        <div class="card-icon">📖</div>
-        <h2>创作者</h2>
-        <p>构建可信的世界：长篇网文、世界观设定、历史考据，规则先行，推演到底。</p>
-        <ul class="tags">
-          <li>长篇网文</li><li>世界观设定</li><li>历史考据</li>
-          <li>体系化推演</li><li>群像叙事</li>
-        </ul>
-      </article>
-    </section>
-
-    <footer class="footer">
-      <p>基于对世界的热爱，构建代码与故事。</p>
-      <div class="links">
-        <a href="https://github.com/xiaobu-dev" target="_blank" rel="noopener">GitHub</a>
-        <span class="sep">·</span>
-        <a href="mailto:smapustyle@gmail.com">Email</a>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://github.com/xiaobu-dev" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.42-2.7 5.39-5.27 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          GitHub
+        </a>
+        <a class="btn btn-ghost" href="mailto:smapustyle@gmail.com">联系我</a>
       </div>
-      <p class="copy">© 2026 小布</p>
+    </header>
+
+    <!-- 统计栏 -->
+    <section class="stats" id="stats">
+      <div class="stat"><b class="num" data-target="12">0</b><span>技术栈</span></div>
+      <div class="stat"><b class="num" data-target="3">0</b><span>核心领域</span></div>
+      <div class="stat"><b class="num" data-target="10">0</b><span>年代码生涯</span></div>
+      <div class="stat"><b class="num" data-target="100">0</b><span>% 热爱</span></div>
+    </section>
+
+    <!-- 技能 -->
+    <section class="sec" id="skills">
+      <h2 class="sec-title"><span class="tick">▍</span>技能栈 <span class="sec-code">// skills</span></h2>
+      <div class="skill-list">
+        <div class="skill">
+          <div class="skill-head"><span class="skill-name">前端工程</span><span class="skill-val">Vue 2/3 · JS/TS · ECharts · Three.js</span></div>
+          <div class="bar"><i data-w="92"></i></div>
+        </div>
+        <div class="skill">
+          <div class="skill-head"><span class="skill-name">后端服务</span><span class="skill-val">Node.js · Python · REST API</span></div>
+          <div class="bar"><i data-w="85"></i></div>
+        </div>
+        <div class="skill">
+          <div class="skill-head"><span class="skill-name">数据可视化</span><span class="skill-val">图表引擎 · 大屏 · 实时数据流</span></div>
+          <div class="bar"><i data-w="90"></i></div>
+        </div>
+        <div class="skill">
+          <div class="skill-head"><span class="skill-name">物联网 / 工业</span><span class="skill-val">设备监控 · 健康管理 · 工业平台</span></div>
+          <div class="bar"><i data-w="80"></i></div>
+        </div>
+        <div class="skill">
+          <div class="skill-head"><span class="skill-name">3D 交互</span><span class="skill-val">WebGL · 场景可视化 · 动效</span></div>
+          <div class="bar"><i data-w="72"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 方向卡片 -->
+    <section class="sec" id="focus">
+      <h2 class="sec-title"><span class="tick">▍</span>专注方向 <span class="sec-code">// focus</span></h2>
+      <div class="grid">
+        <article class="card tilt">
+          <div class="card-icon">🏭</div>
+          <h3>工业物联网</h3>
+          <p>设备数据采集、健康状态监测、工业平台的体系化建设。</p>
+        </article>
+        <article class="card tilt">
+          <div class="card-icon">📊</div>
+          <h3>数据可视化</h3>
+          <p>从图表组件到大屏展示，把冷数据变成可读、可交互的界面。</p>
+        </article>
+        <article class="card tilt">
+          <div class="card-icon">🧊</div>
+          <h3>3D 可视化</h3>
+          <p>WebGL 场景渲染与三维交互，为复杂系统提供空间视角。</p>
+        </article>
+        <article class="card tilt">
+          <div class="card-icon">⚙️</div>
+          <h3>效率工具</h3>
+          <p>自动化脚本与内部工具，把重复劳动交给机器。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 关于 -->
+    <section class="sec" id="about">
+      <h2 class="sec-title"><span class="tick">▍</span>关于 <span class="sec-code">// about</span></h2>
+      <div class="about-box">
+        <p>把复杂系统拆成干净代码，让数据看得见——这是我的工作信条。</p>
+        <p>从传统前端一路走到物联网与可视化交叉领域，习惯用工程化的方式解决问题：先定规则，再推演，最后落地。</p>
+        <div class="about-tags">
+          <span>Vue</span><span>Node.js</span><span>Python</span><span>ECharts</span>
+          <span>Three.js</span><span>IoT</span><span>数据大屏</span><span>3D 可视化</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 联系 -->
+    <footer class="footer" id="contact">
+      <div class="glow-line"></div>
+      <p class="foot-line">[ ~/contact ]$ <span class="blink">▋</span></p>
+      <div class="links">
+        <a class="btn btn-ghost" href="https://github.com/xiaobu-dev" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href="mailto:smapustyle@gmail.com">Email</a>
+      </div>
+      <p class="copy">© 2026 小布 · Built with <span class="heart">♥</span> on GitHub Pages</p>
     </footer>
   </main>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
